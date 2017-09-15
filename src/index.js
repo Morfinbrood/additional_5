@@ -1,8 +1,8 @@
-module.exports = function check(str, bracketsConfig) {
+﻿module.exports = function check(str, bracketsConfig) {
     "use strick";
-
-    console.log("___________________________");
-
+ 
+     console.log("___________________________");
+ 
     //находим индекс закрывающйй скобки начиная с конца, если таковой не будет возвращаем -1
     function findIndEndSubStr(str, endSymbol) {
         for (let i = str.length; i > 0; i--) {
@@ -10,7 +10,7 @@ module.exports = function check(str, bracketsConfig) {
         }
         return -1;
     }
-
+ 
     //разделяем строку на 2 подстроки выводим как массив где [0] 1 строка [1] вторая
     function splitString(str, iEnd) {
         let strArr = ["", ""];
@@ -53,7 +53,7 @@ module.exports = function check(str, bracketsConfig) {
     // str = "(({})[{}])[{}]";
     // console.log ("testing chkSubString= ",  chkSubString(str, bracketsConfig) );
     return (chkSubString(str, bracketsConfig));
-
-    console.log("___________________________");
-    console.log("                   ");
+ 
+     console.log("___________________________");
+     console.log("                   ");
 }
