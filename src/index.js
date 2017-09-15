@@ -1,13 +1,6 @@
 module.exports = function check(str, bracketsConfig) {
     "use strick";
 
-    str = "(({)[}])[}]";
-    bracketsConfig = [
-        ['(', ')'],
-        ['[', ']'],
-        ['{', '}']
-    ];
-
     console.log("___________________________");
 
     //находим индекс закрывающйй скобки начиная с конца, если таковой не будет возвращаем -1
@@ -17,9 +10,6 @@ module.exports = function check(str, bracketsConfig) {
         }
         return -1;
     }
-
-    // console.log("str source = ", str, " bracketsConfig = ", bracketsConfig);
-    // console.log("test findIndEndSubStr i= ", findIndEndSubStr(str, ")"));
 
     //разделяем строку на 2 подстроки выводим как массив где [0] 1 строка [1] вторая
     function splitString(str, iEnd) {
@@ -32,9 +22,6 @@ module.exports = function check(str, bracketsConfig) {
         return strArr;
     }
 
-    //console.log("test splitString strArr= ", splitString(str, 7));
-
-
     // функция находит тип скобок по открывающей скобке и возвращает символ закрывающей скобки
     function findTypeClosBracket(openBracket, bracketsConfig) {
         let result="undef";
@@ -44,38 +31,29 @@ module.exports = function check(str, bracketsConfig) {
         return result;
     };
 
-    //console.log("test findTypeClosBracket openBracket= { ", findTypeClosBracket("{", bracketsConfig));
-
-    //let subStr = str;
     function chkSubString(subStr, bracketsConfig) {
-        console.log ("Input data: str= ", subStr," bracketsConfig= ",bracketsConfig);
+        if (subStr.length == 0) return true;  //чтобы когда разделило строку на 1 и нулевой длины нулевая = true при лог перемножении
+        console.log ("Input str= ", subStr);
         let closeSymb=findTypeClosBracket(subStr[0],bracketsConfig);
         console.log ("closeSymb= ",closeSymb);
         let endIndex =  findIndEndSubStr(subStr,closeSymb);
         console.log ("endIndex= ",endIndex);
-        let subStrArr = splitString(subStr, endIndex);
-        return subStrArr;
+        if (endIndex == -1) return false;
+        else
+        if (endIndex == 1) return true;
+        else{
+            console.log("let subStrArr =");
+            let subStrArr = splitString(subStr, endIndex);
+            if (chkSubString(subStrArr[0],bracketsConfig) && chkSubString(subStrArr[1],bracketsConfig) ==true) return true;
+            else return false;
+        }  
+        console.log ("Error! :ne dolgno do syda doxodit");    
     };
-    console.log ("testing chkSubString= ",  chkSubString(str, bracketsConfig) );
 
+    // str = "(({})[{}])[{}]";
+    // console.log ("testing chkSubString= ",  chkSubString(str, bracketsConfig) );
+    return (chkSubString(str, bracketsConfig));
 
     console.log("___________________________");
     console.log("                   ");
-
-    // let result = "undef";
-
-    // while (result === "undef") {
-    //     pos++;
-    //     if (pos > str.length) result = "finish";
-    // };
-
-
-    // console.log("___________________________");
-    // console.log("str= ", str);
-
-    // if (result == "Err") {
-    //     console.log("= ", false);
-    //     return false
-    // }
-
 }
